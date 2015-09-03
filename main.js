@@ -20,6 +20,7 @@ function init() {
 var results;
 
 function inputClicked() {
+  $('.forecast').empty();
   var input = $('.cityStateInput').val().split(",");
   var UrlCityInput = input[0].replace(/ /g, "_");
   var state = input[1];
@@ -28,38 +29,8 @@ function inputClicked() {
 
 }
 
-function ajaxCalls(state, UrlCityInput){
-  var input = $.ajax("http://api.wunderground.com/api/16b28f8ea83c7f4b/conditions/q/" + state + "/" + UrlCityInput + ".json", {
-    timeout: 10000
-  })
-  input.success(function(data) {
-    var inputRadar = $.get("http://api.wunderground.com/api/16b28f8ea83c7f4b/animatedradar/q/" + state + "/" + UrlCityInput + ".json?width=400&height=3500&newmaps=1", {
-    })
-    inputRadar.success(function(data){
-      console.log('radar data: ', data);
-      generateRadar(data);
-    })
-    inputRadar.fail(function(error){
-      console.log('error: ', error);
-    });
-    console.log(data);
-    generateCurrentInfo(data);
-    var inputForecast = $.get("http://api.wunderground.com/api/16b28f8ea83c7f4b/forecast/q/" + state + "/" + UrlCityInput +".json", {
-    })
-    inputForecast.success(function(data){
-      console.log('Forecast data: ', data);
-      generateForecast(data);
-    })
-    inputForecast.fail(function(error){
-      console.log('error: ', error);
-    });
-  });
-  input.fail(function(error) {
-    console.log('error:', error);
-  });
-}
-
 function currentLocationClicked(){
+  $('.forecast').empty();
   var autoIP = $.get("http://api.wunderground.com/api/16b28f8ea83c7f4b/geolookup/q/autoip.json", {
   })
   autoIP.success(function(data){
@@ -99,6 +70,37 @@ function generateRadar(data){
   }
 }
 
+function ajaxCalls(state, UrlCityInput){
+  var input = $.ajax("http://api.wunderground.com/api/16b28f8ea83c7f4b/conditions/q/" + state + "/" + UrlCityInput + ".json", {
+    timeout: 10000
+  })
+  input.success(function(data) {
+    var inputRadar = $.get("http://api.wunderground.com/api/16b28f8ea83c7f4b/animatedradar/q/" + state + "/" + UrlCityInput + ".json?width=400&height=3500&newmaps=1", {
+    })
+    inputRadar.success(function(data){
+      console.log('radar data: ', data);
+      generateRadar(data);
+    })
+    inputRadar.fail(function(error){
+      console.log('error: ', error);
+    });
+    console.log(data);
+    generateCurrentInfo(data);
+    var inputForecast = $.get("http://api.wunderground.com/api/16b28f8ea83c7f4b/forecast/q/" + state + "/" + UrlCityInput +".json", {
+    })
+    inputForecast.success(function(data){
+      console.log('Forecast data: ', data);
+      generateForecast(data);
+    })
+    inputForecast.fail(function(error){
+      console.log('error: ', error);
+    });
+  });
+  input.fail(function(error) {
+    console.log('error:', error);
+  });
+}
+
 function generateForecast(data){
 
   var $image = $("<img>");
@@ -126,7 +128,6 @@ function generateForecast(data){
   $('<td>').text(day[3].high.fahrenheit + "°f"),
   $('<td>').text(day[3].low.fahrenheit + "°f"));
 
-  //
   $('.forecast').append(dayOne,dayTwo,dayThree,dayFour);
 
 
