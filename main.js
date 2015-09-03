@@ -30,7 +30,7 @@ function inputClicked() {
 
 function ajaxCalls(state, UrlCityInput){
   var input = $.ajax("http://api.wunderground.com/api/16b28f8ea83c7f4b/conditions/q/" + state + "/" + UrlCityInput + ".json", {
-    timeout: 100000
+    timeout: 10000
   })
   input.success(function(data) {
     var inputRadar = $.get("http://api.wunderground.com/api/16b28f8ea83c7f4b/animatedradar/q/" + state + "/" + UrlCityInput + ".json?width=400&height=3500&newmaps=1", {
@@ -93,35 +93,42 @@ function generateRadar(data){
   var $img = $('<img>');
   console.log(radarUrl);
   if(!radarUrl){
-      $img.attr('src', 'http://img.scoop.it/pvC3_kl-w9T_7ZPtTF8TkIXXXL4j3HpexhjNOf_P3YmryPKwJ94QGRtDb3Sbc6KY').addClass("radarImg").hide().appendTo('#radar').fadeIn(400, "swing");
+    $img.attr('src', 'http://img.scoop.it/pvC3_kl-w9T_7ZPtTF8TkIXXXL4j3HpexhjNOf_P3YmryPKwJ94QGRtDb3Sbc6KY').addClass("radarImg").hide().appendTo('#radar').fadeIn(400, "swing");
+  } else {
+    $img.attr('src', radarUrl).addClass("radarImg").hide().appendTo('#radar').fadeIn(400, "swing");
   }
-  $img.attr('src', radarUrl).addClass("radarImg").hide().appendTo('#radar').fadeIn(400, "swing");
 }
 
 function generateForecast(data){
 
   var $image = $("<img>");
+  var $tableRow = $('<tr>');
 
   var day = data.forecast.simpleforecast.forecastday;
-  $('#dayOne').text(day[0].date.weekday);
-  $('#dayTwo').text(day[1].date.weekday);
-  $('#dayThree').text(day[2].date.weekday);
-  $('#dayFour').text(day[3].date.weekday);
 
-  $('#highOne').text(day[0].high.fahrenheit + "°f");
-  $('#highTwo').text(day[1].high.fahrenheit + "°f");
-  $('#highThree').text(day[2].high.fahrenheit + "°f");
-  $('#highFour').text(day[3].high.fahrenheit + "°f");
+  var dayOne = $('<tr>').attr('id','dayOne').append($('<td>').text(day[0].date.weekday),
+  $('<td>').append($("<img>").attr('src', day[0].icon_url)),
+  $('<td>').text(day[0].high.fahrenheit + "°f"),
+  $('<td>').text(day[0].low.fahrenheit + "°f"));
 
-  $('#lowOne').text(day[0].low.fahrenheit + "°f");
-  $('#lowTwo').text(day[1].low.fahrenheit + "°f");
-  $('#lowThree').text(day[2].low.fahrenheit + "°f");
-  $('#lowFour').text(day[3].low.fahrenheit + "°f");
+  var dayTwo = $('<tr>').attr('id','dayTwo').append($('<td>').text(day[1].date.weekday),
+  $('<td>').append($("<img>").attr('src', day[1].icon_url)),
+  $('<td>').text(day[1].high.fahrenheit + "°f"),
+  $('<td>').text(day[1].low.fahrenheit + "°f"));
+  // //
+  var dayThree = $('<tr>').attr('id','dayThree').append($('<td>').text(day[2].date.weekday),
+  $('<td>').append($("<img>").attr('src', day[2].icon_url)),
+  $('<td>').text(day[2].high.fahrenheit + "°f"),
+  $('<td>').text(day[2].low.fahrenheit + "°f"));
+  //
+  var dayFour = $('<tr>').attr('id','dayFour').append($('<td>').text(day[3].date.weekday),
+  $('<td>').append($("<img>").attr('src', day[3].icon_url)),
+  $('<td>').text(day[3].high.fahrenheit + "°f"),
+  $('<td>').text(day[3].low.fahrenheit + "°f"));
 
-  $('#weatherIconOne').attr('src', day[0].icon_url);
-  $('#weatherIconTwo').attr('src', day[1].icon_url);
-  $('#weatherIconThree').attr('src', day[2].icon_url);
-  $('#weatherIconFour').attr('src', day[3].icon_url);
+  //
+  $('.forecast').append(dayOne,dayTwo,dayThree,dayFour);
+
 
   $(".panel").removeClass("hidden").hide().fadeIn(400);
 }

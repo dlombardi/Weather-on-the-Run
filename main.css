@@ -147,8 +147,8 @@ td{
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 320px) {
   .radarImg {
-    width: 350px;
+    width: 300px;
   }
 }
