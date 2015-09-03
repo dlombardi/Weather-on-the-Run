@@ -1,0 +1,154 @@
+body {
+background: #3b679e; /* Old browsers */
+background: -moz-linear-gradient(top,  #3b679e 0%, #2b88d9 50%, #7db9e8 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3b679e), color-stop(50%,#2b88d9), color-stop(100%,#7db9e8)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #3b679e 0%,#2b88d9 50%,#7db9e8 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #3b679e 0%,#2b88d9 50%,#7db9e8 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #3b679e 0%,#2b88d9 50%,#7db9e8 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #3b679e 0%,#2b88d9 50%,#7db9e8 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b679e', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
+}
+
+#title{
+  color: #ffffff;
+  padding-bottom: 10px;
+  border-bottom: 1px rgba(255, 255, 255, 0.9);
+}
+
+.navbar-default{
+  width: 100%;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.navbar-header{
+  text-align: center;
+  width: 500px;
+}
+
+.inputFields{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title{
+  width: 300px;
+  margin: 0 auto;
+  float: left;
+}
+
+
+.weather-icon {
+  height: 150px;
+  width: 150px;
+}
+
+.infoPrint {
+  position: relative;
+  padding-top: 50px;
+  left: 0;
+  width: 400px;
+  margin: 0 auto;
+  font-size: 20px;
+  color: white;
+}
+
+.col {
+  height: 475px;
+}
+
+#radar {
+  position: relative;
+  display: block;
+  height: auto;
+  width: auto;
+}
+
+.radarImg{
+  border: 8px solid white;
+  float: right;
+}
+
+.panel-title{
+  display:inline-block;
+  text-align: center;
+}
+
+.panel{
+  height: 450px;
+}
+
+tr{
+  height: 80px;
+}
+
+td{
+  font-size: 2.5vw;
+}
+
+.active{
+  height: 30px;
+}
+
+#current{
+  float: right;
+  display:inline-block;
+  font-size: 4vw;
+  margin-right: 4%;
+  margin-top: 2%;
+  color:white;
+}
+
+.cityStateInput{
+  height: 35px;
+  border-radius: 5px;
+}
+
+#cityStateName{
+  font-family: 'Walter Turncoat', cursive;
+  display: inline-block;
+  margin-right: 3%;
+  margin-top: 3%;
+  float: right;
+  color: white;
+  font-size: 3vw;
+}
+
+.hidden{
+  display: none;
+}
+
+.initial {
+  left: 50%;
+}
+
+@media (max-width: 900px) {
+  .radarImg {
+    width: 700px;
+  }
+  .navbar-header{
+    width: 500px;
+  }
+  .navbar-default{
+    padding-left: 2px;
+  }
+}
+
+@media (max-width: 700px) {
+  .radarImg {
+    width: 430px;
+  }
+  .navbar-header{
+    width: 350px;
+  }
+  .navbar-default{
+    padding-left: 2px;
+  }
+}
+
+@media (max-width: 450px) {
+  .radarImg {
+    width: 350px;
+  }
+}
